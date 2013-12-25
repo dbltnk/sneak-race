@@ -16,15 +16,28 @@ public class CharacterManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (this.tag == "NPC") {
+			if (this.hasCommand == false) {
+				StartCoroutine("pickCommand"); 
+			}
+		}
+		else if (this.tag == "Player1") {
+			if (Input.GetKey("space")) {
+				this.isWalking = true;
+			}
+			else {
+				this.isWalking = false;
+			}
+		}
+		else {
+			// nothing happens
+		}
+
 		if (this.isWalking) {
 			transform.Translate(Vector3.right * Time.deltaTime * GameManager.walkSpeed);
 		}
-
-		if (this.hasCommand == false) {
-			StartCoroutine("pickCommand"); 
-		}
 	}
-
+	
 	IEnumerator pickCommand() {
 		this.hasCommand = true;
 		float time = Random.Range (GameManager.minWalkDuration, GameManager.maxWalkDuration);
