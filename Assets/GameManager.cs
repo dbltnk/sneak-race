@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 	public List<GameObject> cursors = new List<GameObject>();
 	public int numberOfPlayers;
 	public static float cursorSpeed = 8f;
+	public static Dictionary<string, int> score = new Dictionary<string, int>();
+	string scoreDisplay = "lalala";
 
 	// Use this for initialization
 	void Start () {
@@ -26,21 +28,31 @@ public class GameManager : MonoBehaviour {
 
 		if (numberOfPlayers == 1) {
 			createPlayer("1");
+			score.Add("1", 0);
 		}
 		else if (numberOfPlayers == 2) {
 			createPlayer("1");
+			score.Add("1", 0);
 			createPlayer("2");
+			score.Add("2", 0);
 		}
 		else if (numberOfPlayers == 3) {
 			createPlayer("1");
+			score.Add("1", 0);
 			createPlayer("2");
+			score.Add("2", 0);
 			createPlayer("3");
+			score.Add("3", 0);
 		}
 		else if (numberOfPlayers == 4) {
 			createPlayer("1");
+			score.Add("1", 0);
 			createPlayer("2");
+			score.Add("2", 0);
 			createPlayer("3");
+			score.Add("3", 0);
 			createPlayer("4");
+			score.Add("4", 0);
 		}
 		else {
 			// nothing happens
@@ -52,14 +64,33 @@ public class GameManager : MonoBehaviour {
 			Cursor.tag = j.ToString();
 			cursors.Add(cursor);
 		}
-
 	}
 
 
-	
 	// Update is called once per frame
 	void Update () {
-	
+
+	}
+
+	void OnGUI () {
+
+		if (numberOfPlayers == 1) {
+			scoreDisplay = "Player #1: " + score["1"].ToString();
+		}
+		else if (numberOfPlayers == 2) {
+			scoreDisplay = "Player #1: " + score["1"].ToString() + " Player #2: " + score["2"].ToString();
+		}
+		else if (numberOfPlayers == 3) {
+			scoreDisplay = "Player #1: " + score["1"].ToString() + " Player #2: " + score["2"].ToString() + " Player #3: " + score["3"].ToString();
+		}
+		else if (numberOfPlayers == 4) {
+			scoreDisplay = "Player #1: " + score["1"].ToString() + " Player #2: " + score["2"].ToString() + " Player #3: " + score["3"].ToString()+ " Player #4: " + score["4"].ToString();
+		}
+		else {
+			// nothing happens
+		}
+		GUI.skin.label.fontSize = 30;
+		GUI.Label(new Rect(600,10,10000,100), scoreDisplay);
 	}
 
 	void createPlayer(string playerName) {
@@ -68,7 +99,7 @@ public class GameManager : MonoBehaviour {
 			characters[randomNumber].tag = playerName;
 		}
 		else {
-			Debug.Log("already a player");
+//			Debug.Log("already a player");
 			createPlayer(playerName);
 		}
 	}
