@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		for (int i = 0; i < numberOfPlayers; i++) {
-			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, 0), Quaternion.identity) as GameObject;
+			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
 			int j = i + 1;
 			Cursor.tag = j.ToString();
 			cursors.Add(cursor);

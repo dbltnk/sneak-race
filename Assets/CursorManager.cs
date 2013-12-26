@@ -17,8 +17,17 @@ public class CursorManager : MonoBehaviour {
 
 			if (Input.GetAxis("TriggersL_1") > 0.3f || Input.GetAxis("TriggersR_1") > 0.3f || Input.GetButton("LB_1") || Input.GetButton("RB_1")) {
 				renderer.material.color = new Vector4(1f,1f,1f,1);
-			}
 
+				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
+				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
+				if (hitObjects.Length > 0) {
+					foreach(Collider2D c in hitObjects)
+					{
+						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
+						Destroy(c.collider2D.transform.root.gameObject);
+					}
+				}
+			}
 		}
 		else if (this.tag == "2") {
 			renderer.material.color = new Vector4(0.1f,0.1f,0.75f,1);
