@@ -21,16 +21,8 @@ public class CharacterManager : MonoBehaviour {
 				StartCoroutine("pickCommand"); 
 			}
 		}
-		else if (this.tag == "Player1") {
-			if (Input.GetKey("space")) {
-				this.isWalking = true;
-			}
-			else {
-				this.isWalking = false;
-			}
-		}
 		else {
-			// nothing happens
+			playerInput();
 		}
 
 		if (this.isWalking) {
@@ -52,5 +44,40 @@ public class CharacterManager : MonoBehaviour {
 		this.hasCommand = false;
 		this.isWalking = false;
 //		}
+	}
+
+	void playerInput() {
+		if (this.tag == "Player1") {
+			if (Input.GetButton("A_1")) {
+				this.isWalking = true;
+			}
+			else {
+				this.isWalking = false;
+			}
+		}
+		else if (this.tag == "Player2") {
+			if (Input.GetButton("A_2")) {
+				this.isWalking = true;
+			}
+			else {
+				this.isWalking = false;
+			}
+		}
+		else if (this.tag == "Player3") {
+			if (Input.GetButton("A_3")) {
+				this.isWalking = true;
+			}
+			else {
+				this.isWalking = false;
+			}
+		}
+		else if (this.tag == "Player4") {
+			if (Input.GetButton("A_4")) {
+				this.isWalking = true;
+			}
+			else {
+				this.isWalking = false;
+			}
+		}
 	}
 }
