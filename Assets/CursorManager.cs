@@ -21,11 +21,11 @@ public class CursorManager : MonoBehaviour {
 				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
 				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
 				if (hitObjects.Length > 0) {
-					foreach(Collider2D c in hitObjects)
-					{
+					foreach(Collider2D c in hitObjects)	{
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 						Destroy(c.collider2D.transform.root.gameObject);
 					}
+					Destroy(this.transform.root.gameObject);
 				}
 			}
 		}
@@ -36,6 +36,16 @@ public class CursorManager : MonoBehaviour {
 
 			if (Input.GetAxis("TriggersL_2") > 0.3f || Input.GetAxis("TriggersR_2") > 0.3f || Input.GetButton("LB_2") || Input.GetButton("RB_2")) {
 				renderer.material.color = new Vector4(1f,1f,1f,1);
+
+				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
+				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
+				if (hitObjects.Length > 0) {
+					foreach(Collider2D c in hitObjects)	{
+						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
+						Destroy(c.collider2D.transform.root.gameObject);
+					}
+					Destroy(this.transform.root.gameObject);
+				}
 			}
 		}
 		else if (this.tag == "3") {
@@ -45,6 +55,16 @@ public class CursorManager : MonoBehaviour {
 
 			if (Input.GetAxis("TriggersL_3") > 0.3f || Input.GetAxis("TriggersR_3") > 0.3f || Input.GetButton("LB_3") || Input.GetButton("RB_3")) {
 				renderer.material.color = new Vector4(1f,1f,1f,1);
+
+				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
+				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
+				if (hitObjects.Length > 0) {
+					foreach(Collider2D c in hitObjects)	{
+						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
+						Destroy(c.collider2D.transform.root.gameObject);
+					}
+					Destroy(this.transform.root.gameObject);
+				}
 			}
 		}
 		else if (this.tag == "4") {
@@ -54,6 +74,16 @@ public class CursorManager : MonoBehaviour {
 
 			if (Input.GetAxis("TriggersL_4") > 0.3f || Input.GetAxis("TriggersR_4") > 0.3f || Input.GetButton("LB_4") || Input.GetButton("RB_4")) {
 				renderer.material.color = new Vector4(1f,1f,1f,1);
+
+				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
+				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
+				if (hitObjects.Length > 0) {
+					foreach(Collider2D c in hitObjects)	{
+						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
+						Destroy(c.collider2D.transform.root.gameObject);
+					}
+					Destroy(this.transform.root.gameObject);
+				}
 			}
 		}
 		else {
