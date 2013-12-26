@@ -11,20 +11,41 @@ public class CursorManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (this.tag == "1") {
+			renderer.material.color = new Vector4(0.75f,0.1f,0.1f,1);
 			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_1"),-1 * Input.GetAxis("L_YAxis_1"),0);
 			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+
+			if (Input.GetAxis("TriggersL_1") > 0.3f || Input.GetAxis("TriggersR_1") > 0.3f || Input.GetButton("LB_1") || Input.GetButton("RB_1")) {
+				renderer.material.color = new Vector4(1f,1f,1f,1);
+			}
+
 		}
 		else if (this.tag == "2") {
+			renderer.material.color = new Vector4(0.1f,0.1f,0.75f,1);
 			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_2"),-1 * Input.GetAxis("L_YAxis_2"),0);
 			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+
+			if (Input.GetAxis("TriggersL_2") > 0.3f || Input.GetAxis("TriggersR_2") > 0.3f || Input.GetButton("LB_2") || Input.GetButton("RB_2")) {
+				renderer.material.color = new Vector4(1f,1f,1f,1);
+			}
 		}
 		else if (this.tag == "3") {
+			renderer.material.color = new Vector4(0.1f,0.75f,0.1f,1);
 			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_3"),-1 * Input.GetAxis("L_YAxis_3"),0);
 			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+
+			if (Input.GetAxis("TriggersL_3") > 0.3f || Input.GetAxis("TriggersR_3") > 0.3f || Input.GetButton("LB_3") || Input.GetButton("RB_3")) {
+				renderer.material.color = new Vector4(1f,1f,1f,1);
+			}
 		}
 		else if (this.tag == "4") {
+			renderer.material.color = new Vector4(0.75f,0.75f,0.1f,1);
 			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_4"),-1 * Input.GetAxis("L_YAxis_4"),0);
 			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+
+			if (Input.GetAxis("TriggersL_4") > 0.3f || Input.GetAxis("TriggersR_4") > 0.3f || Input.GetButton("LB_4") || Input.GetButton("RB_4")) {
+				renderer.material.color = new Vector4(1f,1f,1f,1);
+			}
 		}
 		else {
 			// nothing happens
