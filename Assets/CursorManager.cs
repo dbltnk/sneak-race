@@ -25,8 +25,8 @@ public class CursorManager : MonoBehaviour {
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 						Destroy(c.collider2D.transform.root.gameObject);
 					}
-					Destroy(this.transform.root.gameObject);
 				}
+				Destroy(this.transform.root.gameObject);
 			}
 		}
 		else if (this.tag == "2") {
@@ -44,8 +44,8 @@ public class CursorManager : MonoBehaviour {
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 						Destroy(c.collider2D.transform.root.gameObject);
 					}
-					Destroy(this.transform.root.gameObject);
 				}
+				Destroy(this.transform.root.gameObject);
 			}
 		}
 		else if (this.tag == "3") {
@@ -63,8 +63,8 @@ public class CursorManager : MonoBehaviour {
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 						Destroy(c.collider2D.transform.root.gameObject);
 					}
-					Destroy(this.transform.root.gameObject);
 				}
+				Destroy(this.transform.root.gameObject);
 			}
 		}
 		else if (this.tag == "4") {
@@ -82,8 +82,8 @@ public class CursorManager : MonoBehaviour {
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 						Destroy(c.collider2D.transform.root.gameObject);
 					}
-					Destroy(this.transform.root.gameObject);
 				}
+				Destroy(this.transform.root.gameObject);
 			}
 		}
 		else {
