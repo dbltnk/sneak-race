@@ -13,6 +13,7 @@ public class CharacterManager : MonoBehaviour {
 		float g = Random.Range(0f,1f);
 		float b = Random.Range(0f,1f);
 		renderer.material.color = new Vector4(r,g,b,1);
+//		Debug.Log(this.tag);
 	}
 	
 	// Update is called once per frame
