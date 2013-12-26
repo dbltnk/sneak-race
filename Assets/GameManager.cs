@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject character;
 	public int numberOfChars;
-	public static float walkSpeed = 3f;
+	public static float walkSpeed = 0.5f;
 	public static float runSpeed = 1f;
 	public static float minWalkDuration = 0.05f;
 	public static float maxWalkDuration = 1f; 
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		for (int i = 0; i < numberOfChars; i++) {
-			GameObject Char = Instantiate(character, new Vector3(-5, -4.5f + i, 0), Quaternion.identity) as GameObject;
+			GameObject Char = Instantiate(character, new Vector3(-8.5f, -4.5f + i, 0), Quaternion.identity) as GameObject;
 			characters.Add(Char);
 			Char.tag = "NPC";
 		}

@@ -3,8 +3,9 @@ using System.Collections;
 
 public class CharacterManager : MonoBehaviour {
 
-	public bool hasCommand = false;
-	public bool isWalking = false;
+	bool hasCommand = false;
+	bool isWalking = false;
+	bool isRunning = false;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,12 @@ public class CharacterManager : MonoBehaviour {
 		if (this.isWalking) {
 			transform.Translate(Vector3.right * Time.deltaTime * GameManager.walkSpeed);
 		}
+		else if (this.isRunning) {
+			transform.Translate(Vector3.right * Time.deltaTime * GameManager.runSpeed);
+		}
+		else {
+			// nothing happens
+		}
 	}
 	
 	IEnumerator pickCommand() {
@@ -48,35 +55,59 @@ public class CharacterManager : MonoBehaviour {
 
 	void playerInput() {
 		if (this.tag == "Player1") {
-			if (Input.GetButton("A_1")) {
+			if (Input.GetButton("A_1") || Input.GetButton("B_1")) {
 				this.isWalking = true;
+				this.isRunning = false;
+			}
+			else if (Input.GetButton("X_1") || Input.GetButton("Y_1")) {
+				this.isWalking = false;
+				this.isRunning = true;
 			}
 			else {
 				this.isWalking = false;
+				this.isRunning = false;
 			}
 		}
 		else if (this.tag == "Player2") {
-			if (Input.GetButton("A_2")) {
+			if (Input.GetButton("A_2") || Input.GetButton("B_2")) {
 				this.isWalking = true;
+				this.isRunning = false;
+			}
+			else if (Input.GetButton("X_2") || Input.GetButton("Y_2")) {
+				this.isWalking = false;
+				this.isRunning = true;
 			}
 			else {
 				this.isWalking = false;
+				this.isRunning = false;
 			}
 		}
 		else if (this.tag == "Player3") {
-			if (Input.GetButton("A_3")) {
+			if (Input.GetButton("A_3") || Input.GetButton("B_3")) {
 				this.isWalking = true;
+				this.isRunning = false;
+			}
+			else if (Input.GetButton("X_3") || Input.GetButton("Y_3")) {
+				this.isWalking = false;
+				this.isRunning = true;
 			}
 			else {
 				this.isWalking = false;
+				this.isRunning = false;
 			}
 		}
 		else if (this.tag == "Player4") {
-			if (Input.GetButton("A_4")) {
+			if (Input.GetButton("A_4") || Input.GetButton("B_4")) {
 				this.isWalking = true;
+				this.isRunning = false;
+			}
+			else if (Input.GetButton("X_4") || Input.GetButton("Y_4")) {
+				this.isWalking = false;
+				this.isRunning = true;
 			}
 			else {
 				this.isWalking = false;
+				this.isRunning = false;
 			}
 		}
 	}
