@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour {
 	public static float minWalkDuration = 0.05f;
 	public static float maxWalkDuration = 1f; 
 	public List<GameObject> characters = new List<GameObject>();
+	public GameObject cursor;
+	public List<GameObject> cursors = new List<GameObject>();
+	public int numberOfPlayers;
 
 	// Use this for initialization
 	void Start () {
@@ -20,10 +23,33 @@ public class GameManager : MonoBehaviour {
 			Char.tag = "NPC";
 		}
 
-		createPlayer("Player1");
-		createPlayer("Player2");
-		//createPlayer("Player3");
-		//createPlayer("Player4");
+		if (numberOfPlayers == 1) {
+			createPlayer("Player1");
+		}
+		else if (numberOfPlayers == 2) {
+			createPlayer("Player1");
+			createPlayer("Player2");
+		}
+		else if (numberOfPlayers == 3) {
+			createPlayer("Player1");
+			createPlayer("Player2");
+			createPlayer("Player3");
+		}
+		else if (numberOfPlayers == 4) {
+			createPlayer("Player1");
+			createPlayer("Player2");
+			createPlayer("Player3");
+			createPlayer("Player4");
+		}
+		else {
+			// nothing happens
+		}
+
+		for (int i = 0; i < numberOfPlayers; i++) {
+			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, 0), Quaternion.identity) as GameObject;
+			cursors.Add(cursor);
+		}
+
 	}
 
 
