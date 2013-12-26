@@ -54,7 +54,7 @@ public class CharacterManager : MonoBehaviour {
 	}
 
 	void playerInput() {
-		if (this.tag == "Player1") {
+		if (this.tag == "1") {
 			if (Input.GetButton("A_1") || Input.GetButton("B_1")) {
 				this.isWalking = true;
 				this.isRunning = false;
@@ -68,7 +68,7 @@ public class CharacterManager : MonoBehaviour {
 				this.isRunning = false;
 			}
 		}
-		else if (this.tag == "Player2") {
+		else if (this.tag == "2") {
 			if (Input.GetButton("A_2") || Input.GetButton("B_2")) {
 				this.isWalking = true;
 				this.isRunning = false;
@@ -82,7 +82,7 @@ public class CharacterManager : MonoBehaviour {
 				this.isRunning = false;
 			}
 		}
-		else if (this.tag == "Player3") {
+		else if (this.tag == "3") {
 			if (Input.GetButton("A_3") || Input.GetButton("B_3")) {
 				this.isWalking = true;
 				this.isRunning = false;
@@ -96,7 +96,7 @@ public class CharacterManager : MonoBehaviour {
 				this.isRunning = false;
 			}
 		}
-		else if (this.tag == "Player4") {
+		else if (this.tag == "4") {
 			if (Input.GetButton("A_4") || Input.GetButton("B_4")) {
 				this.isWalking = true;
 				this.isRunning = false;

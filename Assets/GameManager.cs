@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject cursor;
 	public List<GameObject> cursors = new List<GameObject>();
 	public int numberOfPlayers;
+	public static float cursorSpeed = 8f;
 
 	// Use this for initialization
 	void Start () {
@@ -24,22 +25,22 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (numberOfPlayers == 1) {
-			createPlayer("Player1");
+			createPlayer("1");
 		}
 		else if (numberOfPlayers == 2) {
-			createPlayer("Player1");
-			createPlayer("Player2");
+			createPlayer("1");
+			createPlayer("2");
 		}
 		else if (numberOfPlayers == 3) {
-			createPlayer("Player1");
-			createPlayer("Player2");
-			createPlayer("Player3");
+			createPlayer("1");
+			createPlayer("2");
+			createPlayer("3");
 		}
 		else if (numberOfPlayers == 4) {
-			createPlayer("Player1");
-			createPlayer("Player2");
-			createPlayer("Player3");
-			createPlayer("Player4");
+			createPlayer("1");
+			createPlayer("2");
+			createPlayer("3");
+			createPlayer("4");
 		}
 		else {
 			// nothing happens
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour {
 
 		for (int i = 0; i < numberOfPlayers; i++) {
 			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, 0), Quaternion.identity) as GameObject;
+			int j = i + 1;
+			Cursor.tag = j.ToString();
 			cursors.Add(cursor);
 		}
 

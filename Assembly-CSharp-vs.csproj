@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CharacterManager.cs" />
+     <Compile Include="Assets\CursorManager.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GoalManager.cs" />
   </ItemGroup>
