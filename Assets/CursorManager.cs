@@ -23,6 +23,12 @@ public class CursorManager : MonoBehaviour {
 				if (hitObjects.Length > 0) {
 					foreach(Collider2D c in hitObjects)	{
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
+						Debug.Log(c.tag);
+						foreach (GameObject cur in GameManager.cursors) {
+							if (cur.tag == c.tag) {
+								Destroy(cur);
+							}
+						}
 						Destroy(c.collider2D.transform.root.gameObject);
 					}
 				}
