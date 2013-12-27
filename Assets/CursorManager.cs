@@ -25,7 +25,7 @@ public class CursorManager : MonoBehaviour {
 						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 						Debug.Log(c.tag);
 						foreach (GameObject cur in GameManager.cursors) {
-							if (cur.tag == c.tag) {
+							if (cur && cur.tag == c.tag) {
 								Destroy(cur);
 							}
 						}
