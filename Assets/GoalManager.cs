@@ -17,7 +17,7 @@ public class GoalManager : MonoBehaviour {
 			foreach(Collider2D c in hitObjects)	{
 //				Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 				GameManager.score[c.tag] += 1;
-//				Destroy(c.collider2D.transform.root.gameObject);
+				Destroy(c.collider2D.transform.root.gameObject);
 				GameManager.resetNow = true;
 			}		
 		}

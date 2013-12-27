@@ -72,9 +72,24 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (resetNow == true) {
-//			resetGame();
-			showNames = true;
+			StartCoroutine("WaitThenReset");
 		}
+	}
+
+	IEnumerator WaitThenReset() {
+		showNames = true;
+		float w = walkSpeed;
+		float r = runSpeed;
+		float c = cursorSpeed;
+		walkSpeed = 0;
+		runSpeed = 0;
+		cursorSpeed = 0;
+		yield return new WaitForSeconds(5.0f);
+		showNames = false;
+		walkSpeed = w;
+		runSpeed = r;
+		cursorSpeed = c;
+		resetGame();
 	}
 
 	void OnGUI () {
@@ -131,11 +146,17 @@ public class GameManager : MonoBehaviour {
 		resetNow = false;
 //		Debug.Log("reset");
 		foreach(GameObject c in characters)	{
-			Destroy(c);
+			if (c) {
+				Destroy(c);
+			}
 		}
+		characters.Clear();
 		foreach(GameObject d in cursors)	{
-			Destroy(d);
+			if (d) {
+				Destroy(d);
+			}
 		}
+		cursors.Clear();
 		for (int i = 0; i < numberOfChars; i++) {
 			GameObject Char = Instantiate(character, new Vector3(-8.5f, -4.5f + i, 0), Quaternion.identity) as GameObject;
 			characters.Add(Char);
