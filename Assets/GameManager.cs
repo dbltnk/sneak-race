@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject character;
 	public int numberOfChars;
 	public static float walkSpeed = 0.5f;
-	public static float runSpeed = 10f;
+	public static float runSpeed = 1f;
 	public static float minWalkDuration = 0.05f;
 	public static float maxWalkDuration = 1f; 
 	public List<GameObject> characters = new List<GameObject>();

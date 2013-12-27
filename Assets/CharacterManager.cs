@@ -41,7 +41,7 @@ public class CharacterManager : MonoBehaviour {
 	IEnumerator pickCommand() {
 		this.hasCommand = true;
 		float time = Random.Range (GameManager.minWalkDuration, GameManager.maxWalkDuration);
-		float randomNumber = Random.Range(-1f,1f);
+		float randomNumber = Random.Range(-1f,2f);
 		if (randomNumber <=0) {
 			this.isWalking = true;
 		}
