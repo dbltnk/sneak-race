@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject character;
 	public int numberOfChars;
 	public static float walkSpeed = 0.5f;
-	public static float runSpeed = 1f;
+	public static float runSpeed = 10f;
 	public static float minWalkDuration = 0.05f;
 	public static float maxWalkDuration = 1f; 
 	public List<GameObject> characters = new List<GameObject>();
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public static Dictionary<string, int> score = new Dictionary<string, int>();
 	string scoreDisplay = "lalala";
 	public static bool resetNow = false;
+	public static bool showNames = false;
 
 	// Use this for initialization
 	void Start () {
@@ -71,7 +72,8 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (resetNow == true) {
-			resetGame();
+//			resetGame();
+			showNames = true;
 		}
 	}
 
@@ -94,6 +96,24 @@ public class GameManager : MonoBehaviour {
 		}
 		GUI.skin.label.fontSize = 30;
 		GUI.Label(new Rect(600,10,10000,100), scoreDisplay);
+
+		if (showNames == true) {
+			foreach (GameObject c in characters) {
+				if (c) {
+					Vector3 pos = Camera.main.WorldToScreenPoint(c.transform.position);
+					pos.y = Screen.height - pos.y;
+					GUI.Label(new Rect(pos.x-30,pos.y,100,100), c.tag);
+				}
+			}
+		}
+
+		foreach (GameObject c in cursors) {
+			if (c) {
+				Vector3 pos = Camera.main.WorldToScreenPoint(c.transform.position);
+				pos.y = Screen.height - pos.y;
+				GUI.Label(new Rect(pos.x+20,pos.y+20,100,100), c.tag);
+			}
+		}
 	}
 
 	void createPlayer(string playerName) {
@@ -109,7 +129,7 @@ public class GameManager : MonoBehaviour {
 
 	void resetGame() {
 		resetNow = false;
-		Debug.Log("reset");
+//		Debug.Log("reset");
 		foreach(GameObject c in characters)	{
 			Destroy(c);
 		}
@@ -120,7 +140,7 @@ public class GameManager : MonoBehaviour {
 			GameObject Char = Instantiate(character, new Vector3(-8.5f, -4.5f + i, 0), Quaternion.identity) as GameObject;
 			characters.Add(Char);
 			Char.tag = "NPC";
-			Debug.Log("done it");
+//			Debug.Log("done it");
 		}
 		if (numberOfPlayers == 1) {
 			createPlayer("1");
