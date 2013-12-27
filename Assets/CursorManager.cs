@@ -1,99 +1,55 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CursorManager : MonoBehaviour {
 
+	Dictionary<string, Vector4> colors = new Dictionary<string, Vector4>();
+	public Vector4 color1 = new Vector4(0.75f,0.1f,0.1f,1);
+	public Vector4 color2 = new Vector4(0.1f,0.1f,0.75f,1);
+	public Vector4 color3 = new Vector4(0.1f,0.75f,0.1f,1);
+	public Vector4 color4 = new Vector4(0.75f,0.75f,0.1f,1);
+
 	// Use this for initialization
 	void Start () {
-	
+		colors.Add("1", color1);
+		colors.Add("2", color2);
+		colors.Add("3", color3);
+		colors.Add("4", color4);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (this.tag == "1") {
-			renderer.material.color = new Vector4(0.75f,0.1f,0.1f,1);
-			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_1"),-1 * Input.GetAxis("L_YAxis_1"),0);
-			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+		controlCursor(this.tag);
+	}
 
-			if (Input.GetAxis("TriggersL_1") > 0.3f || Input.GetAxis("TriggersR_1") > 0.3f || Input.GetButton("LB_1") || Input.GetButton("RB_1")) {
-				renderer.material.color = new Vector4(1f,1f,1f,1);
+	void controlCursor(string name) {
+		renderer.material.color = colors[this.tag];
 
-				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
-				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
-				if (hitObjects.Length > 0) {
-					foreach(Collider2D c in hitObjects)	{
-						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
-//						Debug.Log(c.tag);
-						foreach (GameObject cur in GameManager.cursors) {
-							if (cur && cur.tag == c.tag) {
-								Destroy(cur);
-							}
+		Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_" + name),-1 * Input.GetAxis("L_YAxis_" + name),0);
+		transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+
+		if (Input.GetAxis("TriggersL_" + name) > 0.3f || Input.GetAxis("TriggersR_" + name) > 0.3f || Input.GetButton("LB_" + name) || Input.GetButton("RB_" + name)) {
+			renderer.material.color = new Vector4(1f,1f,1f,1);
+			
+			Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
+			Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
+			if (hitObjects.Length > 0) {
+				foreach(Collider2D c in hitObjects)	{
+					// Debug.Log("Collided with: " + c.collider2D.gameObject.name);
+					// Debug.Log(c.tag);
+					foreach (GameObject cur in GameManager.cursors) {
+						if (cur && cur.tag == c.tag) {
+							Destroy(cur);
 						}
-						Destroy(c.collider2D.transform.root.gameObject);
 					}
+					Destroy(c.collider2D.transform.root.gameObject);
 				}
-				Destroy(this.transform.root.gameObject);
 			}
-		}
-		else if (this.tag == "2") {
-			renderer.material.color = new Vector4(0.1f,0.1f,0.75f,1);
-			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_2"),-1 * Input.GetAxis("L_YAxis_2"),0);
-			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
-
-			if (Input.GetAxis("TriggersL_2") > 0.3f || Input.GetAxis("TriggersR_2") > 0.3f || Input.GetButton("LB_2") || Input.GetButton("RB_2")) {
-				renderer.material.color = new Vector4(1f,1f,1f,1);
-
-				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
-				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
-				if (hitObjects.Length > 0) {
-					foreach(Collider2D c in hitObjects)	{
-						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
-						Destroy(c.collider2D.transform.root.gameObject);
-					}
-				}
-				Destroy(this.transform.root.gameObject);
-			}
-		}
-		else if (this.tag == "3") {
-			renderer.material.color = new Vector4(0.1f,0.75f,0.1f,1);
-			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_3"),-1 * Input.GetAxis("L_YAxis_3"),0);
-			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
-
-			if (Input.GetAxis("TriggersL_3") > 0.3f || Input.GetAxis("TriggersR_3") > 0.3f || Input.GetButton("LB_3") || Input.GetButton("RB_3")) {
-				renderer.material.color = new Vector4(1f,1f,1f,1);
-
-				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
-				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
-				if (hitObjects.Length > 0) {
-					foreach(Collider2D c in hitObjects)	{
-						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
-						Destroy(c.collider2D.transform.root.gameObject);
-					}
-				}
-				Destroy(this.transform.root.gameObject);
-			}
-		}
-		else if (this.tag == "4") {
-			renderer.material.color = new Vector4(0.75f,0.75f,0.1f,1);
-			Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_4"),-1 * Input.GetAxis("L_YAxis_4"),0);
-			transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
-
-			if (Input.GetAxis("TriggersL_4") > 0.3f || Input.GetAxis("TriggersR_4") > 0.3f || Input.GetButton("LB_4") || Input.GetButton("RB_4")) {
-				renderer.material.color = new Vector4(1f,1f,1f,1);
-
-				Vector2 point = new Vector2(this.transform.position.x, this.transform.position.y);
-				Collider2D[] hitObjects = Physics2D.OverlapPointAll(point);
-				if (hitObjects.Length > 0) {
-					foreach(Collider2D c in hitObjects)	{
-						//Debug.Log("Collided with: " + c.collider2D.gameObject.name);
-						Destroy(c.collider2D.transform.root.gameObject);
-					}
-				}
-				Destroy(this.transform.root.gameObject);
-			}
-		}
-		else {
-			// nothing happens
+			Destroy(this.transform.root.gameObject);
 		}
 	}
+
+
+
 }
