@@ -28,41 +28,11 @@ public class GameManager : MonoBehaviour {
 			Char.tag = "NPC";
 		}
 
-		if (numberOfPlayers == 1) {
-			createPlayer("1");
-			score.Add("1", 0);
-		}
-		else if (numberOfPlayers == 2) {
-			createPlayer("1");
-			score.Add("1", 0);
-			createPlayer("2");
-			score.Add("2", 0);
-		}
-		else if (numberOfPlayers == 3) {
-			createPlayer("1");
-			score.Add("1", 0);
-			createPlayer("2");
-			score.Add("2", 0);
-			createPlayer("3");
-			score.Add("3", 0);
-		}
-		else if (numberOfPlayers == 4) {
-			createPlayer("1");
-			score.Add("1", 0);
-			createPlayer("2");
-			score.Add("2", 0);
-			createPlayer("3");
-			score.Add("3", 0);
-			createPlayer("4");
-			score.Add("4", 0);
-		}
-		else {
-			// nothing happens
-		}
-
 		for (int i = 0; i < numberOfPlayers; i++) {
-			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
 			int j = i + 1;
+			createPlayer(j.ToString());
+			score.Add(j.ToString(), 0);
+			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
 			Cursor.tag = j.ToString();
 			cursors.Add(Cursor);
 		}
@@ -161,29 +131,11 @@ public class GameManager : MonoBehaviour {
 			GameObject Char = Instantiate(character, new Vector3(-8.5f, -4.5f + i, 0), Quaternion.identity) as GameObject;
 			characters.Add(Char);
 			Char.tag = "NPC";
-//			Debug.Log("done it");
-		}
-		if (numberOfPlayers == 1) {
-			createPlayer("1");
-		}
-		else if (numberOfPlayers == 2) {
-			createPlayer("1");
-			createPlayer("2");
-		}
-		else if (numberOfPlayers == 3) {
-			createPlayer("1");
-			createPlayer("2");
-			createPlayer("3");
-		}
-		else if (numberOfPlayers == 4) {
-			createPlayer("1");
-			createPlayer("2");
-			createPlayer("3");
-			createPlayer("4");
 		}
 		for (int i = 0; i < numberOfPlayers; i++) {
-			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
 			int j = i + 1;
+			createPlayer(j.ToString());
+			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
 			Cursor.tag = j.ToString();
 			cursors.Add(Cursor);
 		}
