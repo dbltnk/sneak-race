@@ -27,7 +27,8 @@ public class CursorManager : MonoBehaviour {
 		renderer.material.color = colors[this.tag];
 
 		Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_" + name),-1 * Input.GetAxis("L_YAxis_" + name),0);
-		transform.Translate(movement * Time.deltaTime * GameManager.cursorSpeed);
+		float crsrspd = GameObject.Find("GameManager").GetComponent<GameManager>().cursorSpeed;
+		transform.Translate(movement * Time.deltaTime * crsrspd);
 
 		if (Input.GetAxis("TriggersL_" + name) > 0.3f || Input.GetAxis("TriggersR_" + name) > 0.3f || Input.GetButton("LB_" + name) || Input.GetButton("RB_" + name)) {
 			renderer.material.color = new Vector4(1f,1f,1f,1);
@@ -38,7 +39,8 @@ public class CursorManager : MonoBehaviour {
 				foreach(Collider2D c in hitObjects)	{
 					// Debug.Log("Collided with: " + c.collider2D.gameObject.name);
 					// Debug.Log(c.tag);
-					foreach (GameObject cur in GameManager.cursors) {
+					List<GameObject> crsrs = GameObject.Find("GameManager").GetComponent<GameManager>().cursors;
+					foreach (GameObject cur in crsrs) {
 						if (cur && cur.tag == c.tag) {
 							Destroy(cur);
 						}

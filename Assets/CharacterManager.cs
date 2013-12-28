@@ -7,13 +7,13 @@ public class CharacterManager : MonoBehaviour {
 	bool isWalking = false;
 	bool isRunning = false;
 
+
 	// Use this for initialization
 	void Start () {
 		float r = Random.Range(0f,1f);
 		float g = Random.Range(0f,1f);
 		float b = Random.Range(0f,1f);
 		renderer.material.color = new Vector4(r,g,b,1);
-//		Debug.Log(this.tag);
 	}
 	
 	// Update is called once per frame
@@ -27,11 +27,14 @@ public class CharacterManager : MonoBehaviour {
 			playerInput(this.tag);
 		}
 
+		float wlkspd = GameObject.Find("GameManager").GetComponent<GameManager>().walkSpeed;
+		float rnspd = GameObject.Find("GameManager").GetComponent<GameManager>().runSpeed;
+
 		if (this.isWalking) {
-			transform.Translate(Vector3.right * Time.deltaTime * GameManager.walkSpeed);
+			transform.Translate(Vector3.right * Time.deltaTime * wlkspd);
 		}
 		else if (this.isRunning) {
-			transform.Translate(Vector3.right * Time.deltaTime * GameManager.runSpeed);
+			transform.Translate(Vector3.right * Time.deltaTime * rnspd);
 		}
 		else {
 			// nothing happens
@@ -40,7 +43,9 @@ public class CharacterManager : MonoBehaviour {
 	
 	IEnumerator pickCommand() {
 		this.hasCommand = true;
-		float time = Random.Range (GameManager.minWalkDuration, GameManager.maxWalkDuration);
+		float mindur = GameObject.Find("GameManager").GetComponent<GameManager>().minWalkDuration;
+		float maxdur = GameObject.Find("GameManager").GetComponent<GameManager>().maxWalkDuration;
+		float time = Random.Range (mindur, maxdur);
 		float randomNumber = Random.Range(-1f,2f);
 		if (randomNumber <=0) {
 			this.isWalking = true;

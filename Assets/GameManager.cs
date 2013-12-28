@@ -6,19 +6,19 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject character;
 	public int numberOfChars;
-	public static float walkSpeed = 0.5f;
-	public static float runSpeed = 1f;
-	public static float minWalkDuration = 0.05f;
-	public static float maxWalkDuration = 1f; 
+	public float walkSpeed = 0.5f;
+	public float runSpeed = 1f;
+	public float minWalkDuration = 0.05f;
+	public float maxWalkDuration = 1f; 
 	public List<GameObject> characters = new List<GameObject>();
 	public GameObject cursor;
-	public static List<GameObject> cursors = new List<GameObject>();
+	public List<GameObject> cursors = new List<GameObject>();
 	public int numberOfPlayers;
-	public static float cursorSpeed = 8f;
+	public float cursorSpeed = 8f;
 	public static Dictionary<string, int> score = new Dictionary<string, int>();
 	string scoreDisplay = "lalala";
 	public static bool resetNow = false;
-	public static bool showNames = false;
+	public bool showNames = false;
 
 	// Use this for initialization
 	void Start () {
