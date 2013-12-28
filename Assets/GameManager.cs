@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject character;
+	public int numberOfPlayers;
 	public int numberOfChars;
+	public float cursorSpeed = 8f;
 	public float walkSpeed = 0.5f;
 	public float runSpeed = 1f;
 	public float minWalkDuration = 0.05f;
@@ -13,12 +14,11 @@ public class GameManager : MonoBehaviour {
 	public List<GameObject> characters = new List<GameObject>();
 	public GameObject cursor;
 	public List<GameObject> cursors = new List<GameObject>();
-	public int numberOfPlayers;
-	public float cursorSpeed = 8f;
 	public static Dictionary<string, int> score = new Dictionary<string, int>();
 	string scoreDisplay = "lalala";
 	public static bool resetNow = false;
 	public bool showNames = false;
+	public GameObject character;
 
 	// Use this for initialization
 	void Start () {
