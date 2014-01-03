@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+	public static Dictionary<string, int> score = new Dictionary<string, int>();
+	public static bool resetNow = false;
+
 	public int numberOfPlayers;
 	public int numberOfChars;
 	public float cursorSpeed = 8f;
@@ -14,28 +17,42 @@ public class GameManager : MonoBehaviour {
 	public List<GameObject> characters = new List<GameObject>();
 	public GameObject cursor;
 	public List<GameObject> cursors = new List<GameObject>();
-	public static Dictionary<string, int> score = new Dictionary<string, int>();
-	string scoreDisplay = "lalala";
-	public static bool resetNow = false;
 	public bool showNames = false;
 	public GameObject character;
+	public Dictionary<string, Color> colors = new Dictionary<string, Color>();
+	public Color color1 = new Color(0.75f,0.1f,0.1f,1);
+	public Color color2 = new Color(0.1f,0.1f,0.75f,1);
+	public Color color3 = new Color(0.1f,0.75f,0.1f,1);
+	public Color color4 = new Color(0.75f,0.75f,0.1f,1);
 
 	// Use this for initialization
 	void Start () {
+
+		if (numberOfPlayers > numberOfChars) {
+			throw new UnityException("more players than chars");
+		}
+
 		for (int i = 0; i < numberOfChars; i++) {
 			GameObject Char = Instantiate(character, new Vector3(-8.5f, -4.5f + i, 0), Quaternion.identity) as GameObject;
 			characters.Add(Char);
 			Char.tag = "NPC";
 		}
-
+		
 		for (int i = 0; i < numberOfPlayers; i++) {
 			int j = i + 1;
 			createPlayer(j.ToString());
-			score.Add(j.ToString(), 0);
+			if (score.ContainsKey(j.ToString()) == false) {
+				score.Add(j.ToString(), 0);
+			}
 			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
 			Cursor.tag = j.ToString();
 			cursors.Add(Cursor);
 		}
+
+		colors.Add("1", color1);
+		colors.Add("2", color2);
+		colors.Add("3", color3);
+		colors.Add("4", color4);
 	}
 
 
@@ -63,22 +80,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		string scoreDisplay = "";
 
-		if (numberOfPlayers == 1) {
-			scoreDisplay = "Player #1: " + score["1"].ToString();
+		for (int i = 0; i < numberOfPlayers; i++) {
+			int j = i + 1;
+			scoreDisplay += string.Format("Player #{0}: {1} ", j, score[j.ToString()]);
 		}
-		else if (numberOfPlayers == 2) {
-			scoreDisplay = "Player #1: " + score["1"].ToString() + " Player #2: " + score["2"].ToString();
-		}
-		else if (numberOfPlayers == 3) {
-			scoreDisplay = "Player #1: " + score["1"].ToString() + " Player #2: " + score["2"].ToString() + " Player #3: " + score["3"].ToString();
-		}
-		else if (numberOfPlayers == 4) {
-			scoreDisplay = "Player #1: " + score["1"].ToString() + " Player #2: " + score["2"].ToString() + " Player #3: " + score["3"].ToString()+ " Player #4: " + score["4"].ToString();
-		}
-		else {
-			// nothing happens
-		}
+
 		GUI.skin.label.fontSize = 30;
 		GUI.Label(new Rect(600,10,10000,100), scoreDisplay);
 
@@ -114,30 +122,6 @@ public class GameManager : MonoBehaviour {
 
 	void resetGame() {
 		resetNow = false;
-//		Debug.Log("reset");
-		foreach(GameObject c in characters)	{
-			if (c) {
-				Destroy(c);
-			}
-		}
-		characters.Clear();
-		foreach(GameObject d in cursors)	{
-			if (d) {
-				Destroy(d);
-			}
-		}
-		cursors.Clear();
-		for (int i = 0; i < numberOfChars; i++) {
-			GameObject Char = Instantiate(character, new Vector3(-8.5f, -4.5f + i, 0), Quaternion.identity) as GameObject;
-			characters.Add(Char);
-			Char.tag = "NPC";
-		}
-		for (int i = 0; i < numberOfPlayers; i++) {
-			int j = i + 1;
-			createPlayer(j.ToString());
-			GameObject Cursor = Instantiate(cursor, new Vector3(0, 1f - numberOfPlayers + i * 2, -0.1f), Quaternion.identity) as GameObject;
-			Cursor.tag = j.ToString();
-			cursors.Add(Cursor);
-		}
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }

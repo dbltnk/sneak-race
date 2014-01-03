@@ -4,8 +4,12 @@ using System.Collections;
 public class CharacterManager : MonoBehaviour {
 
 	bool hasCommand = false;
-	bool isWalking = false;
-	bool isRunning = false;
+	public enum MoveState {
+		STOPPED = 0,
+		WALKING = 1,
+		RUNNING = 2,
+	};
+	public MoveState moveState = MoveState.STOPPED;
 
 
 	// Use this for initialization
@@ -27,13 +31,14 @@ public class CharacterManager : MonoBehaviour {
 			playerInput(this.tag);
 		}
 
-		float wlkspd = GameObject.Find("GameManager").GetComponent<GameManager>().walkSpeed;
-		float rnspd = GameObject.Find("GameManager").GetComponent<GameManager>().runSpeed;
+		GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		float wlkspd = gameManager.walkSpeed;
+		float rnspd = gameManager.runSpeed;
 
-		if (this.isWalking) {
+		if (moveState == MoveState.WALKING) {
 			transform.Translate(Vector3.right * Time.deltaTime * wlkspd);
 		}
-		else if (this.isRunning) {
+		else if (moveState == MoveState.RUNNING) {
 			transform.Translate(Vector3.right * Time.deltaTime * rnspd);
 		}
 		else {
@@ -43,34 +48,32 @@ public class CharacterManager : MonoBehaviour {
 	
 	IEnumerator pickCommand() {
 		this.hasCommand = true;
-		float mindur = GameObject.Find("GameManager").GetComponent<GameManager>().minWalkDuration;
-		float maxdur = GameObject.Find("GameManager").GetComponent<GameManager>().maxWalkDuration;
+		GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		float mindur = gameManager.minWalkDuration;
+		float maxdur = gameManager.maxWalkDuration;
 		float time = Random.Range (mindur, maxdur);
 		float randomNumber = Random.Range(-1f,2f);
 		if (randomNumber <=0) {
-			this.isWalking = true;
+			moveState = MoveState.WALKING;
 		}
 		else {
-			this.isWalking = false;
+			moveState = MoveState.STOPPED;
 		}
 		yield return new WaitForSeconds(time);
 		this.hasCommand = false;
-		this.isWalking = false;
+		moveState = MoveState.STOPPED;
 //		}
 	}
 
 	void playerInput(string tag) {
 		if (Input.GetButton("A_" + tag) || Input.GetButton("B_" + tag)) {
-			this.isWalking = true;
-			this.isRunning = false;
+			moveState = MoveState.WALKING;
 		}
 		else if (Input.GetButton("X_" + tag) || Input.GetButton("Y_" + tag)) {
-			this.isWalking = false;
-			this.isRunning = true;
+			moveState = MoveState.RUNNING;
 		}
 		else {
-			this.isWalking = false;
-			this.isRunning = false;
+			moveState = MoveState.STOPPED;
 		}
 	}
 }
