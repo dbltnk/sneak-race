@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class CursorManager : MonoBehaviour {
 
-	Dictionary<string, Vector4> colors = new Dictionary<string, Vector4>();
-
-
 	// Use this for initialization
 	void Start () {
 		GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
