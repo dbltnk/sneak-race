@@ -10,7 +10,8 @@ public class CharacterManager : MonoBehaviour {
 		RUNNING = 2,
 	};
 	public MoveState moveState = MoveState.STOPPED;
-
+	public bool isAlive = true;
+	public Sprite deadSprite;
 
 	// Use this for initialization
 	void Start () {
@@ -39,14 +40,18 @@ public class CharacterManager : MonoBehaviour {
 			rnspd = 0;
 		}
 
-		if (moveState == MoveState.WALKING) {
+		if (moveState == MoveState.WALKING && isAlive) {
 			transform.Translate(Vector3.right * Time.deltaTime * wlkspd);
 		}
-		else if (moveState == MoveState.RUNNING) {
+		else if (moveState == MoveState.RUNNING && isAlive) {
 			transform.Translate(Vector3.right * Time.deltaTime * rnspd);
 		}
 		else {
 			// nothing happens
+		}
+
+		if (isAlive == false) {
+			GetComponent<SpriteRenderer>().sprite = deadSprite;
 		}
 	}
 	

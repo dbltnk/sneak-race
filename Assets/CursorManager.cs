@@ -44,7 +44,9 @@ public class CursorManager : MonoBehaviour {
 					}
 
 					// destroy the character that was hit
-					Destroy(c.collider2D.gameObject);
+//					Destroy(c.collider2D.gameObject);
+					CharacterManager charMan = c.GetComponent<CharacterManager>();
+					charMan.isAlive = false;
 				}
 			}
 			// destroy yourself (one shot only)
