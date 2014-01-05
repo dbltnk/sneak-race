@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public static Dictionary<string, int> score = new Dictionary<string, int>();
-	public static bool resetNow = false;
 
+	public bool gameIsPlaying = true;
 	public int numberOfPlayers;
 	public int numberOfChars;
 	public float cursorSpeed = 8f;
@@ -58,25 +58,15 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (resetNow == true) {
-			StartCoroutine("WaitThenReset");
+		if (gameIsPlaying) {
+			showNames = false;
 		}
-	}
-
-	IEnumerator WaitThenReset() {
-		showNames = true;
-		float w = walkSpeed;
-		float r = runSpeed;
-		float c = cursorSpeed;
-		walkSpeed = 0;
-		runSpeed = 0;
-		cursorSpeed = 0;
-		yield return new WaitForSeconds(5.0f);
-		showNames = false;
-		walkSpeed = w;
-		runSpeed = r;
-		cursorSpeed = c;
-		resetGame();
+		else {
+			showNames = true;
+			if (Input.anyKeyDown) {
+				Invoke("resetGame", 3f);
+			}
+		}
 	}
 
 	void OnGUI () {
@@ -121,7 +111,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void resetGame() {
-		resetNow = false;
 		Application.LoadLevel(Application.loadedLevel);
 	}
 }

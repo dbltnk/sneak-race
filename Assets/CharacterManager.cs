@@ -34,6 +34,10 @@ public class CharacterManager : MonoBehaviour {
 		GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		float wlkspd = gameManager.walkSpeed;
 		float rnspd = gameManager.runSpeed;
+		if (gameManager.gameIsPlaying == false) {
+			wlkspd = 0;
+			rnspd = 0;
+		}
 
 		if (moveState == MoveState.WALKING) {
 			transform.Translate(Vector3.right * Time.deltaTime * wlkspd);

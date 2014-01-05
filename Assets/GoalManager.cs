@@ -20,7 +20,8 @@ public class GoalManager : MonoBehaviour {
 					GameManager.score[c.tag] += 1;
 				}
 				Destroy(c.collider2D.gameObject);
-				GameManager.resetNow = true;
+				GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+				gameManager.gameIsPlaying = false;
 			}		
 		}
 	}

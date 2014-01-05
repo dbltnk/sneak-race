@@ -19,6 +19,10 @@ public class CursorManager : MonoBehaviour {
 		Vector3 movement = new Vector3(Input.GetAxis("L_XAxis_" + name),-1 * Input.GetAxis("L_YAxis_" + name),0);
 		GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		float crsrspd = gameManager.cursorSpeed;
+		if (gameManager.gameIsPlaying == false) {
+			crsrspd = 0;
+		}
+
 		transform.Translate(movement * Time.deltaTime * crsrspd);
 
 		if (Input.GetAxis("TriggersL_" + name) > 0.3f || Input.GetAxis("TriggersR_" + name) > 0.3f || Input.GetButton("LB_" + name) || Input.GetButton("RB_" + name)) {
