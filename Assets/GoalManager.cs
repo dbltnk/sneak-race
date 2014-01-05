@@ -16,7 +16,9 @@ public class GoalManager : MonoBehaviour {
 		if (hitObjects.Length > 0) {
 			foreach(Collider2D c in hitObjects)	{
 //				Debug.Log("Collided with: " + c.collider2D.gameObject.name);
-				GameManager.score[c.tag] += 1;
+				if (c.tag != "NPC") {
+					GameManager.score[c.tag] += 1;
+				}
 				Destroy(c.collider2D.gameObject);
 				GameManager.resetNow = true;
 			}		
