@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GoalManager : MonoBehaviour {
 
+	bool hasScored = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -16,10 +18,10 @@ public class GoalManager : MonoBehaviour {
 		if (hitObjects.Length > 0) {
 			foreach(Collider2D c in hitObjects)	{
 //				Debug.Log("Collided with: " + c.collider2D.gameObject.name);
-				if (c.tag != "NPC") {
+				if (c.tag != "NPC" && hasScored == false) {
+					hasScored = true;
 					GameManager.score[c.tag] += 1;
 				}
-				Destroy(c.collider2D.gameObject);
 				GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 				gameManager.gameIsPlaying = false;
 			}		
